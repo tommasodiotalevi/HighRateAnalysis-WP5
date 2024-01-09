@@ -1,0 +1,6 @@
+# Ignore dependency charts
+*.tgz
+
+# Exclude certifcate and private key files
+*.crt
+*.key
