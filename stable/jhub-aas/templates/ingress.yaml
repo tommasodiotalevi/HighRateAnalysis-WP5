@@ -17,19 +17,19 @@ metadata:
       #chunked_transfer_encoding off;
 spec:
   rules:
-    - http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: proxy-public
-                port:
-                  name: http
-      host: {{ .Values.hostname }}
+  - host: {{ .Values.hostname }}.italynorth.cloudapp.azure.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: proxy-public
+            port:
+              name: http
   ingressClassName: nginx
   tls:
   - hosts:
-    - {{ .Values.hostname }}
-    secretName: jhub-tls
+    - {{ .Values.hostname }}.italynorth.cloudapp.azure.com
+    secretName: user-tls-secrets
 {{- end }}
