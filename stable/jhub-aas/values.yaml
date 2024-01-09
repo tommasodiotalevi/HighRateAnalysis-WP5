@@ -5,6 +5,7 @@ hostname: tommihub
 ingress: true
 # Show options for htcondor integration
 htcondor: false
+personalCerts: false
 
 jupyterhub:
   ingress:
