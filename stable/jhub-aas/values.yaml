@@ -1,5 +1,5 @@
-#overide defaault ingress
-hostname: hub.<PUBLIC-IP>.myip.cloud.infn.it
+# yaml-language-server: $schema=values.schema.json
+
 ingress: true
 # Show options for htcondor integration
 htcondor: false
