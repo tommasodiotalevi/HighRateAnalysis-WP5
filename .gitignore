@@ -4,3 +4,6 @@
 # Exclude certifcate and private key files
 *.crt
 *.key
+
+#Exclude lock files
+*.lock
