@@ -12,10 +12,15 @@ This Helm chart is a customization of the one of ["Zero to Jupyter on k8s"](http
   kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.2/cert-manager.yaml
   kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.2/cert-manager.crds.yaml
   ```
-- Ingress-Controller
+- Ingress-Controller (with Azure AKS FQDN). Alternatively it is possible to use also a custom domain (Adding an A record in 
+  your DNS Zone, and changing the hostname in the ingress template of this chart).
   ```
-  helm install ingress-nginx oci://ghcr.io/nginxinc/charts/nginx-ingress --create-namespace --version 1.0.2 -n ingress-nginx
+  helm install ingress-nginx oci://ghcr.io/nginxinc/charts/nginx-ingress --create-namespace --version 1.0.2 \
+    -n ingress-nginx --set controller.service.annotations."service\.beta\.kubernetes\.io/azure-dns-label-name"=<DNS_LABEL> \
+    --set controller.service.annotations."service\.beta\.kubernetes\.io/azure-load-balancer-health-probe-request-path"=/healthz
   ```
+  Replace <DNS_LABEL> with your desided name for the deployment. The final FQDN will be of the form:
+  `<DNS_LABEL>.<AZURE REGION NAME>.cloudapp.azure.com`
 - Local-path:
   ```
   kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/v0.0.24/deploy/local-path-storage.yaml
@@ -39,4 +44,4 @@ helm dependency build
 kubectl create namespace jhub
 helm upgrade --install --cleanup-on-fail --namespace jhub jhub ./ 
 ```
-
+You should now be able to access the service with the FQDN address provided in the steps above.
