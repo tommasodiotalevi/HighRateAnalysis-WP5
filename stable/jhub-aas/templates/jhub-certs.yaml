@@ -1,3 +1,4 @@
+{{- if .Values.personalCerts -}}
 apiVersion: v1
 kind: Secret
 metadata:
@@ -6,3 +7,4 @@ type: kubernetes.io/tls
 data:
 {{ (.Files.Glob "certs/tls.crt").AsSecrets | indent 2 }}
 {{ (.Files.Glob "certs/tls.key").AsSecrets | indent 2 }}
+{{- end }}
