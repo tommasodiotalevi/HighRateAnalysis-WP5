@@ -1,5 +1,7 @@
 # yaml-language-server: $schema=values.schema.json
 
+#overide default ingress
+hostname: tommihub
 ingress: true
 # Show options for htcondor integration
 htcondor: false
